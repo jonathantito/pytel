@@ -34,3 +34,40 @@ telegram.send_message('Some Dude', message)
 # by the telegram-cli instance.
 telegram.send_image('Some Dude', '/tmp/image.png')
 ```
+## troubleshooting
+If you are working on ArchLinux with an armv7, there is a problem with libraries that import PyTel:
+```
+Traceback (most recent call last):
+  File "pytel-leonjza.py", line 1, in <module>
+    from pytel import tg
+  File "/usr/lib/python3.5/site-packages/pytel/tg.py", line 23, in <module>
+    from utils import strings
+ImportError: No module named 'utils'
+
+```
+I solved it installing "utils" with pip
+```
+pip install utils
+
+
+
+Collecting utils
+  Downloading utils-0.9.0.tar.gz
+Installing collected packages: utils
+  Running setup.py install for utils ... done
+Successfully installed utils-0.9.0
+```
+Now when I run the example, it gives me this error:
+```
+Traceback (most recent call last):
+  File "pytel-leonjza.py", line 1, in <module>
+    from pytel import tg
+  File "/usr/lib/python3.5/site-packages/pytel/tg.py", line 23, in <module>
+    from utils import strings
+ImportError: cannot import name 'strings'
+
+```
+So I tried to install "strings" using pip but I have the following error:
+```
+Command "python setup.py egg_info" failed with error code 1 in /tmp/pip-build-hsb7uu5z/strings/
+```
